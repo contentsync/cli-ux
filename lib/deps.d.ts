@@ -15,7 +15,7 @@ export declare const deps: {
     readonly screen: typeof screen;
     readonly prompt: {
         prompt(name: string, options?: prompt.IPromptOptions): Promise<any>;
-        confirm(message: string): Promise<boolean>;
+        confirm(message: string, defaultValue?: boolean | undefined): Promise<boolean>;
     };
     readonly styledObject: typeof styledObject.default;
     readonly styledHeader: typeof styledHeader.default;

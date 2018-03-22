@@ -15,7 +15,7 @@ export declare const cli: {
     fatal: (input: string | Error, opts?: ErrorOptions) => void;
     exit(code?: number, error?: Error | undefined): never;
     readonly prompt: (name: string, options?: IPromptOptions) => Promise<any>;
-    readonly confirm: (message: string) => Promise<boolean>;
+    readonly confirm: (message: string, defaultValue?: boolean | undefined) => Promise<boolean>;
     readonly action: ActionBase;
     styledObject(obj: any, keys?: string[] | undefined): void;
     readonly styledHeader: (header: string) => void;

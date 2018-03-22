@@ -23,10 +23,16 @@ export default {
       return _prompt(name, options)
     }, chalk.cyan('?'))
   },
-  confirm(message: string): Promise<boolean> {
+  confirm(message: string, defaultValue?: boolean): Promise<boolean> {
     return config.action.pauseAsync(async () => {
       const confirm = async (): Promise<boolean> => {
-        let response = (await _prompt(message)).toLowerCase()
+        var options = {};
+        if(defaultValue != undefined){
+          message += ' [' + (defaultValue ? 'yes' : 'no') +']';
+          options = { allowEmpty: true }
+        }
+        let response = (await _prompt(message, options)).toLowerCase()
+        if(response == '' && defaultValue != undefined) return defaultValue
         if (['n', 'no'].includes(response)) return false
         if (['y', 'yes'].includes(response)) return true
         return confirm()
