@@ -10,7 +10,8 @@ export interface IPromptOptions {
 
 interface IPromptConfig {
   name: string
-  prompt: string
+  prompt: string,
+  allowEmpty: boolean,
   type: 'normal' | 'mask' | 'hide'
   isTTY: boolean
 }
@@ -61,7 +62,7 @@ function normal(options: IPromptConfig, retries = 100): Promise<string> {
     process.stdin.once('data', data => {
       process.stdin.pause()
       data = data.trim()
-      if (data === '') {
+      if (data === '' && !options.allowEmpty) {
         resolve(normal(options, retries - 1))
       } else {
         resolve(data)
