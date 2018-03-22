@@ -5,15 +5,16 @@ import deps from './deps'
 
 export interface IPromptOptions {
   prompt?: string
-  type?: 'normal' | 'mask' | 'hide'
+  type?: 'normal' | 'mask' | 'hide',
+  allowEmpty?: boolean
 }
 
 interface IPromptConfig {
   name: string
   prompt: string,
-  allowEmpty: boolean,
   type: 'normal' | 'mask' | 'hide'
-  isTTY: boolean
+  isTTY: boolean,
+  allowEmpty: boolean
 }
 
 export default {
@@ -40,6 +41,7 @@ function _prompt(name: string, inputOptions: Partial<IPromptOptions> = {}): Prom
     isTTY: !!(process.env.TERM !== 'dumb' && process.stdin.isTTY), name,
     prompt: name ? chalk.dim(`${name}: `) : chalk.dim('> '),
     type: 'normal',
+    allowEmpty: false,
     ...inputOptions,
   }
   switch (options.type) {
